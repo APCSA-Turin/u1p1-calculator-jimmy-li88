@@ -28,17 +28,11 @@ public class TipCalculator {
     }
 
     public static String extraCredit(int people, int percent, double cost) {
-        
-        boolean condition = true;
-        
-        
         double tipAmount = cost * percent / 100;
         double totalBillWithTip = cost + tipAmount;
         double costPreTipPerPerson = cost / people;
         double tipPerPerson = tipAmount / people;
         double totalCostPerPerson = totalBillWithTip / people;
-       
-
         // googled how to round two decimals
         String result = "-------------------------------\n" +
                        "Total bill before tip: $" + Math.round(cost * 100) / 100.0 + "\n" +
@@ -47,32 +41,25 @@ public class TipCalculator {
                        "Total Bill with tip: $" + Math.round(totalBillWithTip * 100) / 100.0 + "\n" +
                        "Per person cost before tip: $" + Math.round(costPreTipPerPerson * 100) / 100.0 + "\n" +
                        "Tip per person: $" + Math.round(tipPerPerson * 100) / 100.0 + "\n" +
-                       "Total cost per person: $" + Math.round(totalCostPerPerson * 100) / 100.0 + "\n" +
-                       "-------------------------------\n";
-        // the while loop condition is checked,
-        // and if TRUE, runs the code inside.
-        // when the code inside is done running, the condition is rechecked,
-        // and the loop repeats as long as the condition remains TRUE.
-        // when the condition becomes FALSE, it stops
+                       "Total cost per person: $" + Math.round(totalCostPerPerson * 100) / 100.0 + "\n" + 
+                       "-------------------------------\n" + 
+                       "Items ordered:\n";
         Scanner item = new Scanner(System.in);
-        System.out.println("Enter an item name or type '-1' to finish:");
-        String itemName = item.nextLine();
-        String allItems = "";
+        String itemName = "";
+        // googled Scanner usage
+        
         // chatgpted how to store multiple inputs in a variable
         // googled .equals syntax
         while (!itemName.equals("-1")) {
-            allItems += itemName + "\n";
             System.out.println("Enter an item name or type '-1' to finish:");
-            if (item.hasNextLine()) {
-                itemName = item.nextLine();
+            itemName = item.nextLine();
+            if (!itemName.equals("-1")) {
+                result += itemName + "\n";
             }
-            
-            condition = false;
         }
-        item.close();
-        System.out.println(result);
-        System.out.println("Items ordered:");
-        return allItems;
+        result += "-------------------------------\n";
+item.close();
+        return result;
         
     }
     
